@@ -4,48 +4,33 @@
 #include "node.h"
 
 int main() {
-    struct Node* head = NULL;
+    struct Node *head = NULL;
 
-    FILE* file = fopen("students.bin", "rb");
-    if (file) {
+    load_students_from_file(&head, "students.bin");
 
-        fclose(file);
-        printf("Loading data from students.bin...\n");
-        head = load_students_from_binary_file("students.bin");
-    } else {
+    struct Student *student1 = (struct Student *)studentInit("Ivanov", "Ivan", "M", 20, 101, 5.0, 4.5, 4.0);
+    struct Node *new_node1 = (struct Node *)malloc(sizeof(struct Node));
+    new_node1->data = *student1;
+    new_node1->next = head;
+    head = new_node1;
 
-        printf("File students.bin does not exist. Creating initial data...\n");
-        struct Student student1 = {"Ivanov", "Ivan", 'M', 20, "Group 1", 4, 3, 5};
-        struct Student student2 = {"Petrov", "Petr", 'M', 21, "Group 2", 3, 4, 5};
+    struct Student *student2 = (struct Student *)studentInit("Petrov", "Petr", "M", 21, 102, 4.5, 4.0, 3.5);
+    struct Node *new_node2 = (struct Node *)malloc(sizeof(struct Node));
+    new_node2->data = *student2;
+    new_node2->next = head;
+    head = new_node2;
 
-        append(&head, &student1);
-        append(&head, &student2);
+    save_students_to_file(head, "students.bin");
 
-        printf("Initial information of students in the list:\n");
-        print_list(head);
-
-        save_students_to_binary_file(head, "students.bin");
+    while (head != NULL) {
+        struct Node *temp = head;
+        head->data.infoOutput(&(head->data));
+        head = head->next;
+        free(temp);
     }
 
-    if (head == NULL) {
-        printf("No students to display.\n");
-        return 0;
-    }
-
-    printf("\nIncreasing physics grade for all students...\n");
-
-    struct Node* current = head;
-    while (current != NULL) {
-        increase_physics_grade(&(current->data));
-        current = current->next;
-    }
-
-    printf("\nUpdated information of students in the list:\n");
-    print_list(head);
-
-    save_students_to_binary_file(head, "students.bin");
-
-    free_list(head);
+    free(student1);
+    free(student2);
 
     return 0;
 }
