@@ -3,7 +3,7 @@
 #include "node.h"
 
 void save_students_to_file(struct Node* head, const char* filename);
-struct Node* load_students_from_file(const char* filename);б
+struct Node* load_students_from_file(const char* filename);
 
 int main() {
     struct Node* head = NULL;
