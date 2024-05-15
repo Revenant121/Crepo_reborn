@@ -1,0 +1,3 @@
+C:/Users/Лиджик/CLionProjects/practica10/cmake-build-debug/CMakeFiles/practica10.dir
+C:/Users/Лиджик/CLionProjects/practica10/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Лиджик/CLionProjects/practica10/cmake-build-debug/CMakeFiles/rebuild_cache.dir
