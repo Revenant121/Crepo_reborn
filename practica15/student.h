@@ -2,7 +2,7 @@
 #define STUDENT_H
 
 #include <stdio.h>
-
+/
 struct Student {
     char *surname;
     char *name;

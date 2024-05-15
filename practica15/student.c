@@ -106,7 +106,7 @@ void save_students_to_file(struct Node *head, const char *filename) {
 
     fclose(file);
 }
-
+/
 void load_students_from_file(struct Node **head_ref, const char *filename) {
     FILE *file = fopen(filename, "rb");
     if (!file) {
