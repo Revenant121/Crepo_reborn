@@ -13,7 +13,7 @@ int main() {
     new_node1->data = *student1;
     new_node1->next = head;
     head = new_node1;
-/
+
     struct Student *student2 = (struct Student *)studentInit("Petrov", "Petr", "M", 21, 102, 4.5, 4.0, 3.5);
     struct Node *new_node2 = (struct Node *)malloc(sizeof(struct Node));
     new_node2->data = *student2;

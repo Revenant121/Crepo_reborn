@@ -1,7 +1,7 @@
 #include "node.h"
 #include <stdio.h>
 #include <stdlib.h>
-/
+
 void append(struct Node **head_ref, struct Student new_data) {
     struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
     if (!new_node) {
