@@ -1,36 +1,44 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "student.h"
 #include "node.h"
 
 int main() {
-    struct Node *head = NULL;
+    struct Node* head = NULL;
 
-    load_students_from_file(&head, "students.bin");
+    struct Student student1 = {"Ivanov", "Ivan", 'M', 20, "Group 1", 4, 3, 5};
+    struct Student student2 = {"Petrov", "Petr", 'M', 21, "Group 2", 3, 4, 5};
 
-    struct Student *student1 = (struct Student *)studentInit("Ivanov", "Ivan", "M", 20, 101, 5.0, 4.5, 4.0);
-    struct Node *new_node1 = (struct Node *)malloc(sizeof(struct Node));
-    new_node1->data = *student1;
-    new_node1->next = head;
-    head = new_node1;
+    append(&head, &student1);
+    append(&head, &student2);
 
-    struct Student *student2 = (struct Student *)studentInit("Petrov", "Petr", "M", 21, 102, 4.5, 4.0, 3.5);
-    struct Node *new_node2 = (struct Node *)malloc(sizeof(struct Node));
-    new_node2->data = *student2;
-    new_node2->next = head;
-    head = new_node2;
+    printf("Initial information of students in the list:\n");
+    print_list(head);
 
-    save_students_to_file(head, "students.bin");
+    printf("\nIncreasing physics grade for all students...\n");
 
-    while (head != NULL) {
-        struct Node *temp = head;
-        head->data.infoOutput(&(head->data));
-        head = head->next;
-        free(temp);
+    struct Node* current = head;
+    while (current != NULL) {
+        increase_physics_grade(&(current->data));
+        current = current->next;
     }
 
-    free(student1);
-    free(student2);
+    printf("\nUpdated information of students in the list:\n");
+    print_list(head);
+
+    // Save the list to a file
+    save_students_to_file("students.dat", head);
+
+    // Free the list
+    free_list(head);
+    head = NULL;
+
+    // Load the list from the file
+    head = load_students_from_file("students.dat");
+
+    printf("\nLoaded information of students from file:\n");
+    print_list(head);
+
+    free_list(head);
 
     return 0;
 }

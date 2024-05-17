@@ -1,29 +1,20 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <stdio.h>
-
+#define MAX_NAME_LENGTH 50
 
 struct Student {
-    char *surname;
-    char *name;
-    char *sex;
+    char surname[MAX_NAME_LENGTH];
+    char name[MAX_NAME_LENGTH];
+    char gender;
     int age;
-    int group;
-    float mathMark;
-    float physicsMark;
-    float chemistryMark;
-    void* (*infoOutput)(void*);
-    void* (*saveToBinary)(void*);
+    char group[10];
+    int math_grade;
+    int physics_grade;
+    int chemistry_grade;
 };
 
-struct Node {
-    struct Student data;
-    struct Node* next;
-};
+void print_student(struct Student *student);
+void increase_physics_grade(struct Student *student);
 
-void* studentInit(void *surname, void *name, void *sex, int age, int group, float mathMark, float physicsMark, float chemistryMark);
-void save_students_to_file(struct Node *head, const char *filename);
-void load_students_from_file(struct Node **head_ref, const char *filename);
-
-#endif // STUDENT_H
+#endif /* STUDENT_H */

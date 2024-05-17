@@ -3,6 +3,15 @@
 
 #include "student.h"
 
-void append(struct Node **head_ref, struct Student new_data);
+struct Node {
+    struct Student data;
+    struct Node* next;
+};
 
-#endif // NODE_H
+void append(struct Node** head_ref, struct Student* student);
+void print_list(struct Node* head);
+void free_list(struct Node* head);
+void save_students_to_file(const char *filename, struct Node *head);
+struct Node* load_students_from_file(const char *filename);
+
+#endif /* NODE_H */
